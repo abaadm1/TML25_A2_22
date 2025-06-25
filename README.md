@@ -1,6 +1,21 @@
 ## 1. Introduction
 In this assignment, we successfully replicated the behavior of a protected machine learning encoder using model stealing techniques, despite the presence of B4B (Bucks for Buckets) defense. Our final surrogate encoder achieved a competitive L2 distance of **4.706**. This readme provides a thorough, step-by-step explanation of our methodology, the difficulties we encountered, and how each design choice assisted in resolving them.
 
+### Repository Contents
+
+This repository includes all necessary components for replicating our model stealing attack against the B4B-protected encoder:
+
+- `api_requestor.py`: Automates the API querying process. Loads the `ModelStealingPub.pt` dataset, sends 13 batched queries (1,000 images each) to the victim encoder's `/query` endpoint, and saves the 1024-dimensional embedding responses in `out{i}.pickle` files. Includes a 90-second delay between requests to comply with the rate limit.
+
+- `encoder-stealing.ipynb`: Core training pipeline notebook. Implements preprocessing, the custom `EnhancedResNetEncoder`, our hybrid loss function, training loop, Optuna-based hyperparameter tuning, and ONNX export.
+
+- `stolen_encoder_final.pt`: Trained PyTorch checkpoint of the stolen encoder.
+
+- `stolen_encoder_optimized.onnx`: Final ONNX-exported model for evaluation and submission.
+
+- `requirements.txt`: Lists all Python dependencies for reproducibility and environment setup.
+
+
 ## 2. Strategy and Challenges
 ### 2.1 Dataset & API Query Strategy
 We first determined that the provided dataset `ModelStealingPub.pt` contained exactly 13,000 images. In the surrogate dataset approach, we start by shuffling the entire dataset. Then, we run 13 separate queries, each retrieving 1,000 samples, resulting in a final dataset of 13,000 samples arranged in the order the queries were made. Each query returned 1024-dimensional embeddings from the victim encoder:
