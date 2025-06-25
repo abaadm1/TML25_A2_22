@@ -5,9 +5,9 @@ In this assignment, we successfully replicated the behavior of a protected machi
 
 This repository includes all necessary components for replicating our model stealing attack against the B4B-protected encoder:
 
-- `api_requestor.py`: Automates the API querying process. Loads the `ModelStealingPub.pt` dataset, sends 13 batched queries (1,000 images each) to the victim encoder's `/query` endpoint, and saves the 1024-dimensional embedding responses in `out{i}.pickle` files. Includes a 90-second delay between requests to comply with the rate limit.
+- `api_requestor.py`: Automates the API querying process.
 
-- `encoder-stealing.ipynb`: Core training pipeline notebook. Implements preprocessing, the custom `EnhancedResNetEncoder`, our hybrid loss function, training loop, Optuna-based hyperparameter tuning, and ONNX export.
+- `encoder-stealing.ipynb`: Core training pipeline notebook **(main code file)**
 
 - `stolen_encoder_final.pt`: Trained PyTorch checkpoint of the stolen encoder.
 
