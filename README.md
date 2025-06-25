@@ -36,4 +36,10 @@ img.convert("RGB")
 
 ## 3. Transition to BESA (Perturbation Recovery)
 To counter B4B, we adopted the BESA strategy from https://arxiv.org/pdf/2506.04556
+### 3.1 How BESA Works
+- **Train shadow encoders** on a similar domain to mimic the victim encoder.
+- **Apply perturbations** (Gaussian noise, Top-k masking, quantization) to simulate B4B.
+- **Train a meta-classifier** to detect both the existence and type of perturbation.
+- **Train a generator** (often adversarially) to recover clean embeddings from noisy ones.
+
 
