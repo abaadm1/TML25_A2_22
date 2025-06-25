@@ -42,4 +42,18 @@ To counter B4B, we adopted the BESA strategy from https://arxiv.org/pdf/2506.045
 - **Train a meta-classifier** to detect both the existence and type of perturbation.
 - **Train a generator** (often adversarially) to recover clean embeddings from noisy ones.
 
+### 3.2 Results of BESA Phase
+Using the BESA pipeline, we improved our performance:Score improved from ~120 → 44 and further tuning reduced L2 distance to 25.47.
+The model architecture used was: 
+- Encoder (ResNet50 Backbone) and Projector Head.
+- Dataset augmentation: resize to 32x32 → Center crop → Normalize but no heavy augmentation (e.g., no ColorJitter/RandomFlip) to avoid distorting embeddings.
+- Some hyperparameter tuning of batch size, learning rate and weight decay etc.
+- HybridLoss combining MSE, Cosine and Contrastive Loss.
+
+However, keeping BESA as a preprocessing-only pipeline was not optimal. We realized the need to embed noise-awareness directly into our training loop to mimick the behavior of B4B defence.
+
+
+
+
+
 
