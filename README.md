@@ -25,7 +25,7 @@ embeddings = model_stealing(batch_images, port=PORT)
 ```
 These embeddings were saved as `out{i}.pickle` for later training. The dataset can be accessed [here](https://drive.google.com/drive/folders/1XYM_9pgHlzaAsTavjNof0jqvw2tHwq_a?usp=drive_link).
 ### 2.2 Initial Model
-We initially trained a surrogate model (ResNet-50) via MoCo-style contrastive learning inspired by the paper https://yangzhangalmo.github.io/papers/CVPR23.pdf. However, the results were disappointing, with L2 ≈ 120. We diagnosed three main problems:
+We initially trained a surrogate model (ResNet-50) via MoCo-style contrastive learning inspired by this [research paper](https://yangzhangalmo.github.io/papers/CVPR23.pdf). However, the results were disappointing, with L2 ≈ 120. We diagnosed three main problems:
 - We faced the issue of **inconsistent channels** in the images, some of the images or embeddings were not RGB which we fixed using 
 ```python
 img.convert("RGB")
@@ -35,7 +35,7 @@ img.convert("RGB")
 - We weren’t intendedly **mitigating B4B noise** at this point to see how strong the victim encoder’s B4B defense is, which was corrupting our training targets. <br>
 
 ## 3. Transition to BESA (Perturbation Recovery)
-To counter B4B, we adopted the BESA strategy from https://arxiv.org/pdf/2506.04556
+To counter B4B, we adopted the BESA strategy from this [research paper](https://arxiv.org/pdf/2506.04556)
 ### 3.1 How BESA Works
 - **Train shadow encoders** on a similar domain to mimic the victim encoder.
 - **Apply perturbations** (Gaussian noise, Top-k masking, quantization) to simulate B4B.
