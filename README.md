@@ -157,5 +157,7 @@ B4B applies stochastic perturbations to mislead model stealing attacks. Our mode
 This project demonstrates that advanced defenses like B4B can be countered with a carefully designed, defense-aware training strategy. By combining compact architecture, hybrid loss functions, augmentation, and tuning, we replicated the protected encoder with high fidelity. Our pipeline generalizes to other perturbation-based defenses and inspires robust learning under noise.
 
 
+https://github.com/abaadm1/TML25_A2_22/releases/tag/final-release
+
 
 
